@@ -71,6 +71,8 @@
 - 地区节点改为手动选择
    - 香港、台湾、日本、新加坡、美国和其他节点均使用 `select`
    - 保留按节点名称自动归类，不再通过 `url-test` 自动切换节点
+   - 各地区默认进入对应的自建子组；子组内仅显示该地区且名称包含 [自建] 的节点
+   - 如果地区没有匹配的 [自建] 节点，可在地区组中直接选择该地区的其他节点
 - 甲骨文云直连
    - `Oracle.list` 前置直连规则覆盖 `oracle.com`、`oraclecloud.com`、`oraclecloudapps.com`、`oci.customer-oci.com` 和 `ocir.io`
    - 补充控制台依赖的 `oracleinfinity.io`、`oracle.112.2o7.net` 和 `consent.trustarc.com`，后两者仅匹配精确域名
