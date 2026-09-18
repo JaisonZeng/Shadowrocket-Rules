@@ -30,7 +30,7 @@
 
 或者扫描二维码
 
-<img width="200" height="200" alt="ctool-2026-02-26-17-13-16" src="https://github.com/user-attachments/assets/22f1b4f7-3265-493c-9e5a-2b662924ed2f" />
+![Shadowrocket 配置二维码](config-qr.png)
 
 ## 分流规则
 
