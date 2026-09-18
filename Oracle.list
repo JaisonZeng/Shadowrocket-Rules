@@ -1,0 +1,10 @@
+# > Oracle Cloud
+# 登录、控制台、API、云应用、对象存储及容器镜像仓库
+DOMAIN-SUFFIX,oracle.com
+DOMAIN-SUFFIX,oraclecloud.com
+DOMAIN-SUFFIX,oraclecloudapps.com
+DOMAIN-SUFFIX,oci.customer-oci.com
+DOMAIN-SUFFIX,ocir.io
+DOMAIN-SUFFIX,oracleinfinity.io
+DOMAIN,oracle.112.2o7.net
+DOMAIN,consent.trustarc.com

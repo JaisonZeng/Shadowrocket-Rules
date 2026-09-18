@@ -15,13 +15,14 @@
 | 🏦 汇丰香港 | 🇭🇰 香港节点 | DIRECT、节点选择、PROXY |
 | 🏦 香港银行 | DIRECT | 香港节点、节点选择、PROXY |
 | 📈 券商服务 | 🇭🇰 香港节点 | DIRECT、节点选择、PROXY |
+| ☁️ 甲骨文云 | DIRECT | 固定直连 |
 | 🌍 非中国 | PROXY | 节点选择、DIRECT、日本节点 |
 | 🐟 漏网之鱼 | PROXY | 节点选择、DIRECT、日本节点 |
 
 ## 快速开始
 
 1. 复制配置文件的 Raw 链接：
-   `https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/refs/heads/main/Shadowrocket.conf`
+   `https://raw.githubusercontent.com/JaisonZeng/Shadowrocket-Rules/refs/heads/main/Shadowrocket.conf`
 2. 打开 Shadowrocket → 配置 → 右上角 `+` → 粘贴链接 → 下载
 3. 点击已下载的配置，设为使用中（✔️）
 4. 首页添加你自己的节点或订阅
@@ -35,6 +36,7 @@
 
 | 优先级 | 服务 | 默认策略 |
 |--------|------|----------|
+| 前置 | ☁️ 甲骨文云（登录 / 控制台 / API / 云应用 / 对象存储 / 容器镜像仓库） | DIRECT |
 | 1 | 🧱 DNS 防泄露（HTTPDNS） | REJECT |
 | 2 | 📧 邮件服务（IMAP / POP3 / SMTP） | PROXY，可切换 DIRECT 或地区节点 |
 | 3 | 🔍 谷歌服务（含 Gemini） | 日本节点，可手动切香港节点 |
@@ -66,6 +68,21 @@
 
 ## 当前重点
 
+- 地区节点改为手动选择
+   - 香港、台湾、日本、美国和其他节点均使用 `select`
+   - 保留按节点名称自动归类，不再通过 `url-test` 自动切换节点
+   - 每个地区首位放置对应的“自建”手动选择子组，同时匹配地区关键词和完整的 `[自建]` 标记，例如 `🇯🇵 [自建] 东京 01`
+   - 地区列表仍保留该地区的全部节点；先选择“日本自建”等子组，再进入子组选择具体节点即可使用自建出口
+   - 这里置顶的是自建子组入口，组内节点仍按 App 的顺序展示；没有匹配自建节点时，请在地区列表直接选择可用节点
+- 甲骨文云直连
+   - `Oracle.list` 前置直连规则覆盖 `oracle.com`、`oraclecloud.com`、`oraclecloudapps.com`、`oci.customer-oci.com` 和 `ocir.io`
+   - 补充控制台依赖的 `oracleinfinity.io`、`oracle.112.2o7.net` 和 `consent.trustarc.com`，后两者仅匹配精确域名
+   - 域名范围参考 Oracle 的[控制台网络要求](https://docs.oracle.com/en-us/iaas/Content/GSG/Concepts/console_topic-Allowlist.htm)、[云数据库 DNS](https://docs.oracle.com/en-us/iaas/Content/database-at-aws/oaaws-network-dns.htm)、[对象存储端点](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/file-uri-formats.html)和[容器镜像仓库](https://docs.oracle.com/en-us/iaas/Content/Registry/Concepts/registryconcepts.htm)文档
+   - 使用现有 `dns-direct-system = true`，直连域名交给系统 DNS 解析
+   - 实例公网 IP 或自定义域名不在上述域名范围内，需要按实际地址单独添加直连规则
+- 自定义域名策略
+   - 在 `Personal.list` 中维护自己的域名
+   - 通过 `🧩 自定义域名` 组选择 `DIRECT`、`PROXY`、`🚀 节点选择` 或 `REJECT`
 - 优化 DNS 防泄露
    - 代理域名默认通过代理访问 Cloudflare DoH，备用使用 Google DoH
    - 代理 DNS 不回退系统 DNS，避免代理域名查询从本地网络泄露
@@ -122,6 +139,8 @@
 ## 注意事项
 
 - 地区分组通过节点名称关键词自动匹配，请确保你的节点名称包含地区标识（如 🇭🇰、HK、香港等）
+- 各地区内的具体节点需要手动选择；如需测速后仍保持原选择，请关闭代理分组内的“测试并选择最快服务器”选项
+- 为保持自建子组入口的配置顺序，请关闭代理分组内的“根据 Ping 排序”选项
 - 银行服务对出口 IP 稳定性较敏感；使用香港代理时，建议尽量保持同一节点
 - Google、AI、非中国和漏网之鱼的默认出口可在 App 内手动切换
 - 如需 HTTPS 解密功能，请在 Shadowrocket 中生成并安装 CA 证书

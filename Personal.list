@@ -1,0 +1,4 @@
+# > Personal Domains
+# 在此添加自己的域名规则，例如：
+# DOMAIN-SUFFIX,example.com
+# DOMAIN,api.example.net
