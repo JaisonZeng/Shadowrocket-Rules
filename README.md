@@ -7,7 +7,7 @@
 | 服务 | 默认策略 | 可选策略 |
 |------|----------|----------|
 | 🧱 DNS 防泄露 | REJECT | 节点选择、DIRECT |
-| 📧 邮件服务 | PROXY | DIRECT、节点选择、日本节点、香港节点 |
+| 📧 邮件服务 | DIRECT | PROXY、节点选择、REJECT |
 | 🔍 谷歌服务 | 🇯🇵 日本节点 | 日本、香港、美国、新加坡、节点选择、PROXY、DIRECT |
 | 🤖 AI 服务 | 🇺🇸 美国节点 | 节点选择、PROXY、DIRECT |
 | 🍎 苹果推送 | 🚀 节点选择 | PROXY、DIRECT |
@@ -38,7 +38,7 @@
 |--------|------|----------|
 | 前置 | ☁️ 甲骨文云（登录 / 控制台 / API / 云应用 / 对象存储 / 容器镜像仓库） | DIRECT |
 | 1 | 🧱 DNS 防泄露（HTTPDNS） | REJECT |
-| 2 | 📧 邮件服务（IMAP / POP3 / SMTP） | PROXY，可切换 DIRECT 或地区节点 |
+| 2 | 📧 邮件服务（IMAP / POP3 / SMTP） | DIRECT，可切换 PROXY、节点选择或 REJECT |
 | 3 | 🔍 谷歌服务（含 Gemini） | 日本节点，可手动切换香港、美国或新加坡节点 |
 | 4 | 🤖 AI 服务（ChatGPT、Claude 等） | 美国节点 |
 | 5 | 📹 油管视频（含 YouTube 翻译 API） | 节点选择 |
@@ -116,7 +116,7 @@
 - DNS：代理域名使用经代理转发的 Cloudflare / Google DoH，直连域名使用系统 DNS
 - DNS 劫持：拦截常见硬编码 53 端口 DNS，防止应用绕过规则
 - HTTPDNS 拦截：引用 blackmatrix7 `BlockHttpDNS`，阻止 App 通过内置 HTTPDNS 绕过系统解析
-- 邮件分流：常见邮件协议端点默认使用 PROXY，可按网络情况切换直连或地区节点
+- 邮件分流：常见邮件协议端点默认直连，可切换 PROXY、节点选择或 REJECT
 - QUIC 屏蔽：对代理连接屏蔽 UDP/443，强制回退 HTTP/2
 - 本地服务保护：`localhost.weixin.qq.com` 固定解析到 `127.0.0.1` 并强制直连，避免 fake-IP 影响微信本地回调
 - TUN 直连优化：iCloud Photos / CloudKit / Apple CDN 域名使用系统 DNS 并跳过代理，保留 Apple Push 走代理
