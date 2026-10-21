@@ -10,7 +10,6 @@
 | 📧 邮件服务 | DIRECT | PROXY、节点选择、REJECT |
 | 🔍 谷歌服务 | 🇯🇵 日本节点 | 日本、香港、美国、新加坡、节点选择、PROXY、DIRECT |
 | 🤖 AI 服务 | 🇺🇸 美国节点 | 日本、新加坡、节点选择、PROXY、DIRECT |
-| 🛠️ 自建服务 | DIRECT | PROXY、节点选择、香港 / 日本 / 新加坡 / 美国节点、REJECT |
 | 🍎 苹果推送 | 🚀 节点选择 | PROXY、DIRECT |
 | 🍏 苹果服务 | DIRECT | 节点选择、PROXY |
 | 🏦 汇丰香港 | 🇭🇰 香港节点 | DIRECT、节点选择、PROXY |
@@ -37,7 +36,6 @@
 
 | 优先级 | 服务 | 默认策略 |
 |--------|------|----------|
-| 前置 | 🛠️ 自建服务（`jaisquidward.top` / `jai-squidward.top`） | DIRECT，可切换 PROXY 或地区节点 |
 | 前置 | ☁️ 甲骨文云（登录 / 控制台 / API / 云应用 / 对象存储 / 容器镜像仓库） | DIRECT |
 | 1 | 🧱 DNS 防泄露（HTTPDNS） | REJECT |
 | 2 | 📧 邮件服务（IMAP / POP3 / SMTP） | DIRECT，可切换 PROXY、节点选择或 REJECT |
@@ -67,7 +65,6 @@
 - `Apple.list` 基于 blackmatrix7 Apple 规则，并配套加载 `Apple_Domain.list`，补充 iCloud Photos / Apple CDN 直连域名
 - `HK_Broker.list` 补充富途 / moomoo / 长桥 / 老虎 / 雪盈 / 盈透 / TradeUP / Schwab 证券域名及交易 IP 段
 - `HSBC_HK.list` 与 `HK_Banks_Direct.list` 收录香港银行网站及 App 服务域名
-- `SelfHosted.list` 收录自建服务域名 `jaisquidward.top` 与 `jai-squidward.top`（含全部子域名）
 
 ## 当前重点
 
@@ -83,13 +80,9 @@
    - 使用现有 `dns-direct-system = true`，直连域名交给系统 DNS 解析
    - 实例公网 IP 或自定义域名不在上述域名范围内，需要按实际地址单独添加直连规则
 - 自定义域名策略
-   - 在 `Personal.list` 中维护自己的域名
+   - 在 `Personal.list` 中维护自己的域名，他人使用时替换为各自的域名即可
    - 通过 `🧩 自定义域名` 组选择 `DIRECT`、`PROXY`、`🚀 节点选择` 或 `REJECT`
-- 自建服务分流
-   - `jaisquidward.top` 与 `jai-squidward.top` 收录在 `SelfHosted.list`，两个域名互为别名
-   - 通过 `🛠️ 自建服务` 组选择 `DIRECT`、`PROXY`、`🚀 节点选择`、任一地区节点或 `REJECT`
-   - 默认 `DIRECT`，需要走代理时在组内切换即可，无需改规则
-   - 该组排在甲骨文云之前，确保自建域名优先于其他直连规则命中
+   - 文件内自带的 `jaisquidward.top` / `jai-squidward.top` 是作者示例，可整段删除
 - 优化 DNS 防泄露
    - 代理域名默认通过代理访问 Cloudflare DoH，备用使用 Google DoH
    - 代理 DNS 不回退系统 DNS，避免代理域名查询从本地网络泄露

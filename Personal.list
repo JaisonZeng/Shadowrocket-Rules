@@ -1,4 +1,16 @@
 # > Personal Domains
-# 在此添加自己的域名规则，例如：
+# 在此添加自己的域名规则，命中后由「🧩 自定义域名」策略组决定走向。
+# 用法：
+#   1. 在下方追加自己的域名
+#   2. 在 App 的「🧩 自定义域名」组里选择 DIRECT / PROXY / 🚀 节点选择 / REJECT
+#   3. 想按域名分别控制，可再拆一个独立策略组，但记得同步改 Shadowrocket.conf 的 RULE-SET
+#
+# 格式示例：
 # DOMAIN-SUFFIX,example.com
 # DOMAIN,api.example.net
+
+# > 作者自建服务（示例）
+# 这两个域名是配置作者自己的，他人使用时可直接删除或替换为自己的域名。
+# DOMAIN-SUFFIX 已覆盖主域名本身，无需再写 DOMAIN。
+DOMAIN-SUFFIX,jaisquidward.top
+DOMAIN-SUFFIX,jai-squidward.top
